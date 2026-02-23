@@ -7,5 +7,9 @@ cmds = ["npm install"]
 [phases.build]
 cmds = ["npm run build"]
 
+# This tells Railway EXACTLY which folder to keep after the build is done
+[static]
+directory = "build"
+
 [start]
 cmd = "npx serve -s build"

@@ -53,92 +53,88 @@ export default function RSVPPortal() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    // Validate form based on attendance
-    if (!formData.name || !formData.attending) {
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  // 1. Validation Logic
+  if (!formData.name || !formData.attending) {
+    setSubmitMessage({
+      type: 'error',
+      text: 'Please fill in all required fields.'
+    });
+    return;
+  }
+
+  if (formData.attending === 'yes') {
+    if (!formData.arrivalDate || !formData.arrivalTime || !formData.transportation) {
       setSubmitMessage({
         type: 'error',
-        text: 'Please fill in all required fields.'
+        text: 'Please fill in all required fields for your arrival details.'
       });
       return;
     }
+  }
+  
+  // 2. Environment Variable Check
+  const submitUrl = process.env.REACT_APP_GOOGLE_SCRIPT_URL;
+  if (!submitUrl) {
+    setSubmitMessage({
+      type: 'error',
+      text: 'Integration not configured. Check Railway Variables.'
+    });
+    return;
+  }
 
-    if (formData.attending === 'yes') {
-      if (!formData.arrivalDate || !formData.arrivalTime || !formData.transportation) {
-        setSubmitMessage({
-          type: 'error',
-          text: 'Please fill in all required fields for your arrival details.'
-        });
-        return;
-      }
-    }
-    
-    const submitUrl = getSubmitUrl();
-    if (!submitUrl) {
-      setSubmitMessage({
-        type: 'error',
-        text: 'Google Sheets integration not configured. Please set REACT_APP_GOOGLE_SCRIPT_URL in your .env file.'
+  setIsSubmitting(true);
+  setSubmitMessage({ type: '', text: '' });
+
+  try {
+    // 3. The Fetch Request
+    // We use 'no-cors' which prevents the browser from blocking the request 
+    // due to missing headers from Google.
+    await fetch(submitUrl, {
+      method: 'POST',
+      mode: 'no-cors', 
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(formData).toString(),
+    });
+
+    // 4. Handle "Silent Success"
+    // Since 'no-cors' doesn't allow us to read the response, 
+    // we jump straight to the success UI.
+    const successText = formData.attending === 'no' 
+      ? 'Thanks for your blessing!' 
+      : 'RSVP submitted successfully! Thank you for your response.';
+
+    setSubmitMessage({ type: 'success', text: successText });
+
+    // 5. Form Reset and UI Cleanup
+    setTimeout(() => {
+      setFormData({ 
+        name: '', 
+        attending: '', 
+        arrivalDate: '', 
+        arrivalTime: '', 
+        transportation: '' 
       });
-      return;
-    }
+      setShowRSVP(false);
+      setSubmitMessage({ type: '', text: '' });
+    }, 2500);
 
-    setIsSubmitting(true);
-    setSubmitMessage({ type: '', text: '' });
-
-    try {
-      const response = await fetch(submitUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams(formData).toString(),
-      });
-
-      let result;
-      try {
-        result = await response.json();
-      } catch (parseError) {
-        result = { success: true };
-      }
-
-      if (result && result.success) {
-        if (formData.attending === 'no') {
-          setSubmitMessage({ type: 'success', text: 'Thanks for your blessing!' });
-        } else {
-          setSubmitMessage({ type: 'success', text: 'RSVP submitted successfully! Thank you for your response.' });
-        }
-        setTimeout(() => {
-          setFormData({ name: '', attending: '', arrivalDate: '', arrivalTime: '', transportation: '' });
-          setShowRSVP(false);
-          setSubmitMessage({ type: '', text: '' });
-        }, 2000);
-      } else {
-        if (formData.attending === 'no') {
-          setSubmitMessage({ type: 'success', text: 'Thanks for your blessing!' });
-        } else {
-          setSubmitMessage({ type: 'success', text: 'RSVP submitted successfully! Thank you for your response.' });
-        }
-        setTimeout(() => {
-          setFormData({ name: '', attending: '', arrivalDate: '', arrivalTime: '', transportation: '' });
-          setShowRSVP(false);
-          setSubmitMessage({ type: '', text: '' });
-        }, 2000);
-      }
-    } catch (error) {
-      console.error('Error submitting RSVP:', error);
-    let errorMessage = 'Failed to submit RSVP. ';
-    if (error.message.includes('Failed to fetch') || error.name === 'TypeError') {
-      errorMessage += 'Please check: 1) Your internet connection, 2) The Google Apps Script URL in .env file, 3) The script is deployed as a Web App with "Anyone" access, 4) You restarted the dev server after updating .env';
-    } else {
-      errorMessage += error.message || 'Please try again later.';
-    }
-    setSubmitMessage({ type: 'error', text: errorMessage });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  } catch (error) {
+    // 6. Actual Error Handling
+    // This only runs if the request fails to leave the browser (e.g., no internet).
+    console.error('Submission error:', error);
+    setSubmitMessage({ 
+      type: 'error', 
+      text: 'Network error. Please check your connection and try again.' 
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

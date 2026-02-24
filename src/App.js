@@ -322,33 +322,96 @@ const handleSubmit = async (e) => {
 
             <div className="faq-container">
               <div className="faq-item">
-                <h3 className="faq-question">When is the event?</h3>
-                <p className="faq-answer">The celebration will take place on [Date] at [Time].</p>
+                <h3 className="faq-question">When should I arrive in Hyderabad?</h3>
+                <p className="faq-answer">Please plan to arrive on or after March 12th, 2026.
+Our celebrations begin with a lunchtime event on March 12th, so we recommend booking your travel soon.</p>
               </div>
 
               <div className="faq-item">
-                <h3 className="faq-question">Where is the venue?</h3>
-                <p className="faq-answer">[Venue Name], [Address]. Parking is available on-site.</p>
+                <h3 className="faq-question">Where will we be staying? Do we need to book rooms?</h3>
+                <p className="faq-answer">Your stay at Browntown Resort is already arranged for the nights of March 12th, 13th, and 14th.
+Check-out will be March 15th at 11:00 AM (after breakfast).
+No separate booking required ✨</p>
               </div>
 
               <div className="faq-item">
-                <h3 className="faq-question">What's the dress code?</h3>
-                <p className="faq-answer">Semi-formal attire is requested.</p>
+                <h3 className="faq-question">What documents are needed for check-in?</h3>
+                <p className="faq-answer">A valid government-issued ID is required for all guests at check-in.
+Please ensure everyone in your group (including children) carries their ID.</p>
               </div>
 
               <div className="faq-item">
-                <h3 className="faq-question">Can I bring a plus one?</h3>
-                <p className="faq-answer">Please refer to your invitation. If it says "and guest," you're welcome to bring someone!</p>
+                <h3 className="faq-question">What’s happening once we arrive?</h3>
+                <p className="faq-answer">We kick things off with a lunchtime gathering and the Pellikuturu ceremony, along with check-in.
+Arrive, settle in, and let the celebrations begin!
+</p>
               </div>
 
-              <div className="faq-item">
-                <h3 className="faq-question">Will food be provided?</h3>
-                <p className="faq-answer">Yes! A full dinner will be served. Please let us know of any dietary restrictions in your RSVP.</p>
-              </div>
+<div className="faq-item">
+  <h3 className="faq-question">What are the events and dress codes?</h3>
+  
+  <div className="faq-answer">
+    <h4>March 12</h4>
+    <p><strong>Pellikuturu Ceremony –</strong> Telugu Traditional</p>
+    <p><strong>Mehendi Night –</strong> Warm Sunset Carnival</p>
+
+    <h4>March 13</h4>
+    <p><strong>Tilak –</strong> Classic Ethnic</p>
+    <p><strong>Golden Haldi –</strong> Yellow Hues</p>
+
+    <h4>March 14</h4>
+    <p><strong>Wedding Ceremony –</strong> Indian Traditional</p>
+    <p><strong>Reception –</strong> Glitz & Glam</p>
+
+    <p>
+      Dress codes are optional and meant as inspiration. <br />
+      Yellow is warmly encouraged for Haldi 💛
+    </p>
+  </div>
+</div>
 
               <div className="faq-item">
-                <h3 className="faq-question">How do I get there?</h3>
-                <p className="faq-answer">The venue is easily accessible by car and public transportation. Details will be sent after you RSVP.</p>
+                <h3 className="faq-question">How do I get to the resort?</h3>
+                <p className="faq-answer">Group transportation will be arranged for guests traveling from outside Hyderabad.
+This will be coordinated based on the travel details you’ve shared with us.</p>
+              </div>
+  
+  <div className="faq-item">
+                <h3 className="faq-question">Can I extend my stay?</h3>
+                <p className="faq-answer">Accommodation is covered for March 12th–14th.
+If you plan to arrive earlier or stay longer, we kindly request that you book those additional nights separately.
+Please note: With the event schedule, it may be difficult to leave the venue during these dates.
+</p>
+              </div>
+  
+              <div className="faq-item">
+                <h3 className="faq-question">Do you have a gift registry?</h3>
+                <p className="faq-answer">Your presence and blessings are the greatest gifts. Truly 💛</p>
+              </div>
+  
+              <div className="faq-item">
+                            <h3 className="faq-question">Who can I contact during the wedding?</h3>
+              <div className="faq-answer">
+                <p><strong>Event Management Team:</strong> Wizard Entertainment</p>
+                <p><strong>Point of Contact:</strong> Paramjeet Singh</p>
+                <p><strong>Phone:</strong> +91 70939 34489</p>
+            
+                <p>
+                  Paramjeet will be your go-to person for any assistance during the festivities.
+                </p>
+              </div>
+                <div className="faq-item">
+                <h3 className="faq-question">Kindly Note</h3>
+  <div className="faq-answer">
+    <p>The following services are payable directly by guests:</p>
+    
+    <ul>
+      <li>Room service (food, beverages, dry cleaning, etc.)</li>
+      <li>Hotel concierge services</li>
+      <li>Make-up, hair, and saree/lehenga draping services</li>
+    </ul>
+  </div>
+              </div>
               </div>
             </div>
           </div>

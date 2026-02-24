@@ -400,7 +400,8 @@ Please note: With the event schedule, it may be difficult to leave the venue dur
                   Paramjeet will be your go-to person for any assistance during the festivities.
                 </p>
               </div>
-                <div className="faq-item">
+              </div>
+                  <div className="faq-item">
                 <h3 className="faq-question">Kindly Note</h3>
   <div className="faq-answer">
     <p>The following services are payable directly by guests:</p>
@@ -411,7 +412,6 @@ Please note: With the event schedule, it may be difficult to leave the venue dur
       <li>Make-up, hair, and saree/lehenga draping services</li>
     </ul>
   </div>
-              </div>
               </div>
             </div>
           </div>

@@ -178,9 +178,6 @@ const handleSubmit = async (e) => {
           <button onClick={() => setShowFAQ(true)} className="btn btn-icon btn-secondary" title="FAQ">
             <HelpCircle size={22} />
           </button>
-          <a href={PDF_URL} target="_blank" rel="noopener noreferrer" className="btn btn-icon btn-secondary" title="PDF">
-            <Shirt size={22} />
-          </a>
           <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" className="btn btn-icon btn-secondary" title="Location">
             <MapPin size={22} />
           </a>

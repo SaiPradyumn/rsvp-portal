@@ -48,10 +48,30 @@ export default function RSVPPortal() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    setScrollY(currentScrollY);
+
+    // Lock once the overlay has fully scrolled away
+    const threshold = window.innerHeight;
+    if (currentScrollY >= threshold) {
+      // Snap to exactly the threshold so there's no bounce/overscroll
+      window.scrollTo(0, threshold);
+      // Lock scrolling permanently (until refresh)
+      document.body.style.overflow = 'hidden';
+      window.removeEventListener('scroll', handleScroll);
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
+
+  useEffect(() => {
+  return () => {
+    document.body.style.overflow = '';
+  };
+}, []);
 
 const handleSubmit = async (e) => {
   e.preventDefault();

@@ -48,18 +48,24 @@ export default function RSVPPortal() {
   }, []);
 
   useEffect(() => {
+  let locked = false;
+
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
+    
+    if (locked) {
+      // Already locked — snap back to threshold if they try to scroll
+      window.scrollTo(0, window.innerHeight);
+      return;
+    }
+
     setScrollY(currentScrollY);
 
-    // Lock once the overlay has fully scrolled away
     const threshold = window.innerHeight;
     if (currentScrollY >= threshold) {
-      // Snap to exactly the threshold so there's no bounce/overscroll
+      locked = true;
+      setScrollY(threshold);
       window.scrollTo(0, threshold);
-      // Lock scrolling permanently (until refresh)
-      document.body.style.overflow = 'hidden';
-      window.removeEventListener('scroll', handleScroll);
     }
   };
 

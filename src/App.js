@@ -315,7 +315,7 @@ const handleSubmit = async (e) => {
                       value={formData.travelingFrom}
                       onChange={handleChange}
                       className="form-input"
-                      placeholder="e.g., Chicago, IL"
+                      placeholder="e.g., Mumbai"
                       required
                     />
                   </div>

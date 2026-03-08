@@ -277,6 +277,25 @@ const handleSubmit = async (e) => {
                   </div>
 
                   <div className="form-group">
+                    <label className="form-label">Number of guests attending?</label>
+                    <select
+                      name="numberOfGuests"
+                      value={formData.numberOfGuests}
+                      onChange={handleChange}
+                      className="form-input"
+                      required
+                    >
+                      <option value="">Select number of guests...</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
                     <label className="form-label">What time?</label>
                     <input
                       type="time"
@@ -284,6 +303,19 @@ const handleSubmit = async (e) => {
                       value={formData.arrivalTime}
                       onChange={handleChange}
                       className="form-input"
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Traveling from (city/state)</label>
+                    <input
+                      type="text"
+                      name="travelingFrom"
+                      value={formData.travelingFrom}
+                      onChange={handleChange}
+                      className="form-input"
+                      placeholder="e.g., Chicago, IL"
                       required
                     />
                   </div>
